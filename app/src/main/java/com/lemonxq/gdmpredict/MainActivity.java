@@ -122,7 +122,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } else {
-            showResponse("年龄、身高、体重、空腹血糖不能为空");
+//            showResponse("年龄、身高、体重、空腹血糖不能为空");
+            showResponse("Age、Height、Weight、Fasting blood glucose level" +
+                    " CANNOT BE NULL");
         }
     }
 

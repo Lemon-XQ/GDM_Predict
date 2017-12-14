@@ -63,7 +63,7 @@ public class AnalyzeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_analyze, container, false);
+        view = inflater.inflate(R.layout.fragment_analyze_en, container, false);
         InitComponent();
         SetListeners();
         updateTime();
@@ -301,7 +301,8 @@ public class AnalyzeFragment extends Fragment {
     private void updateTime(){
         long time = System.currentTimeMillis();
         Date date = new Date(time);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分 E", Locale.CHINA);
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分 E", Locale.CHINA);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm EEE", Locale.ENGLISH);
         timeText.setText(format.format(date));
     }
 
@@ -324,14 +325,14 @@ public class AnalyzeFragment extends Fragment {
 
         new AlertDialog.Builder(this.getActivity())
                 .setView(outerView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         infoBtn.setText(selectText);
                         infoBtn.setTextColor(green);
                     }
                 })
-                .setNegativeButton("取消",null)
+                .setNegativeButton("Cancel",null)
                 .show();
     }
 
@@ -367,7 +368,7 @@ public class AnalyzeFragment extends Fragment {
 
         new AlertDialog.Builder(this.getActivity())
                 .setView(outerView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String text = selectText_left + "." + selectText_right;
@@ -377,7 +378,7 @@ public class AnalyzeFragment extends Fragment {
                         weight = Float.parseFloat(selectText_left) + 0.1f * Float.parseFloat(selectText_right);
                     }
                 })
-                .setNegativeButton("取消",null)
+                .setNegativeButton("Cancel",null)
                 .show();
     }
 
