@@ -1,6 +1,7 @@
 package com.lemonxq.gdmpredict;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +11,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lemonxq.gdmpredict.Util.CommonRequest;
@@ -26,6 +29,8 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView back;
+    private ProgressBar progressBar;
+    private TextView progressText;
     private int age;
     private float height;
     private float weight;
@@ -47,7 +52,14 @@ public class MainActivity extends AppCompatActivity {
                         height = bundle.getFloat("height");
                         ogtt = bundle.getFloat("OGTT");
                         Log.d("Analyse", "age:" + age + "height:" + height + "weight:" + weight + "ogtt:" + ogtt);
-                        AnalyseDIAB(age, height, weight, ogtt);
+                        if(checkDataValid(age,height,weight,ogtt)){
+                            LoadProgressBar(3000);
+                        }
+                        else {
+//            showResponse("年龄、身高、体重、空腹血糖不能为空");
+                            showResponse("Age、Height、Weight、Fasting blood glucose level" +
+                                    " CANNOT BE NULL");
+                        }
                         break;
 
                     default:
@@ -85,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void AnalyseDIAB(int age, float height, float weight, float ogtt) {
 
-        if (checkDataValid(age, height, weight, ogtt)) {
-            //TODO 进度条
+//        if (checkDataValid(age, height, weight, ogtt)) {
             // 创建请求体对象
             CommonRequest request = new CommonRequest();
 
@@ -121,22 +132,16 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             });
-        } else {
-            showResponse("年龄、身高、体重、空腹血糖不能为空");
-        }
+//        } else {
+////            showResponse("年龄、身高、体重、空腹血糖不能为空");
+//            showResponse("Age、Height、Weight、Fasting blood glucose level" +
+//                    " CANNOT BE NULL");
+//        }
     }
 
     private boolean checkDataValid(int age, float height, float weight, float ogtt) {
         if(age == 0 || height == 0 || weight == 0 || ogtt == 0)
             return  false;
-        //        if (age <= 0 || age >= 150)
-//            return false;
-//        if (height <= 0 || height >= 3)
-//            return false;
-//        if (weight <= 0 || weight >= 300)
-//            return false;
-//        if (ogtt <= 0)
-//            return false;
         return true;
     }
 
@@ -162,5 +167,54 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);// 添加事务到返回栈中
         transaction.commit();
     }
+
+    void LoadProgressBar(final long time){
+        final ProgressDialog progressDialog = new ProgressDialog
+                (MainActivity.this);
+        progressDialog.setMessage("AI IS THINKING...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(time);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                        AnalyseDIAB(age, height, weight, ogtt);
+                    }
+                });
+            }
+        }).start();
+    }
+//    void LoadProgressBar(final long time){
+//        progressBar = fragment.getView().findViewById(R.id.progressbar);
+//        progressText = fragment.getView().findViewById(R.id.progressHintText);
+//        progressText.setEnabled(true);
+//        progressBar.setVisibility(View.VISIBLE);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(time);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        progressBar.setVisibility(View.GONE);
+//                        progressText.setEnabled(false);
+//
+//                    }
+//                });
+//            }
+//        }).start();
+//    }
 
 }

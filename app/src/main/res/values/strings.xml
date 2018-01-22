@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">安心孕</string>
+    <string name="app_name">Care-2-you</string>
+    <string name="app_name_cn">安心孕</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -40,6 +41,22 @@
     <string name="GDM">妊娠期糖尿病</string>
     <string name="accuracy">准确度</string>
 
+
+    <string name="Age_en">Ages(years old)</string>
+    <string name="Height_en">Height(cm)</string>
+    <string name="Weight_en">Weight(kg)</string>
+    <string name="OGTT_en">Fasting blood glucose level(mmol/L)</string>
+    <string name="input_hint_en">CLICK TO ENTER</string>
+    <string name="RecordHint_en">Record your current data</string>
+    <string name="ConfirmAnalyse_en">Start analysis</string>
+    <string name="ShowAnalyseResult_en">Result</string>
+    <string name="normal_msg_en">Chance of getting Gestational Diabetes Mellitus: Low.
+        It is suggested to have blood glucose test regularly and monitor the change in blood glucose level. Go to the hospital immediately if there is a great change in blood glucose level.</string>
+    <string name="normal_en">Normal</string>
+    <string name="GDM_msg_en">Chance of getting Gestational Diabetes Mellitus: High.
+It is suggested that to have a further examination in hospital to confirm.</string>
+    <string name="GDM_en">Gestational Diabetes Mellitus</string>
+    <string name="accuracy_en">Accuracy</string>
 
     <string-array name="welcome_trips">
         <item>主人，奴婢在此等候多时了</item>

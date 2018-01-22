@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +27,7 @@ import java.util.Locale;
 
 public class AnalyzeFragment extends Fragment {
 
+    private ProgressBar progressBar;
     private Button analyseBtn;
     private Button ageBtn;
     private Button heightBtn;
@@ -39,7 +39,11 @@ public class AnalyzeFragment extends Fragment {
     private int age;
     private float height;
     private float weight;
+    private int weight_Int;
+    private float weight_Float;
     private float ogtt;
+    private int ogtt_Int;
+    private float ogtt_Float;
 
     private Handler handler;
 
@@ -63,11 +67,10 @@ public class AnalyzeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_analyze, container, false);
+        view = inflater.inflate(R.layout.fragment_analyze_en, container, false);
         InitComponent();
         SetListeners();
         updateTime();
-        Log.e("Analyse", "create view");
         return view;
     }
 
@@ -79,7 +82,6 @@ public class AnalyzeFragment extends Fragment {
         weight = 0;
         height = 0;
         ogtt = 0;
-        ogttText.setText("");
     }
 
     private void InitComponent() {
@@ -87,8 +89,7 @@ public class AnalyzeFragment extends Fragment {
         ageBtn = view.findViewById(R.id.ageBtn);
         weightBtn = view.findViewById(R.id.weightBtn);
         heightBtn = view.findViewById(R.id.heightBtn);
-//        ogttBtn = view.findViewById(R.id.ogttBtn);
-        ogttText = view.findViewById(R.id.ogtt);
+        ogttBtn = view.findViewById(R.id.ogttBtn);
         timeText = view.findViewById(R.id.currentTime);
 
         // 填充列表
@@ -109,9 +110,10 @@ public class AnalyzeFragment extends Fragment {
         for (int i = 0; i <= 9; i++){
             zeroToNineList.add(i+"");
         }
-        for (int i = 0; i <= 150; i++){
-            ogttList.add(i/10.0+""); // ogtt: 0.0-15.0
+        for (int i = 0; i <= 30; i++){
+            ogttList.add(i+""); // ogtt: 0.0-30.0
         }
+
         // Init Color
         green = getActivity().getApplicationContext().getResources().getColor(R.color.green);
     }
@@ -206,29 +208,28 @@ public class AnalyzeFragment extends Fragment {
 //
 //            }
 //        });
-        ogttText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                try {
-                    ogtt = Float.parseFloat(ogttText.getText().toString());
-                } catch (NumberFormatException e) {
-//                    Toast.makeText(getActivity(), Consts.OGTT_INVALID, Toast.LENGTH_SHORT).show();
-                    ogtt = 0;
-                }
-
-            }
-        });
-
+//        ogttText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                try {
+//                    ogtt = Float.parseFloat(ogttText.getText().toString());
+//                } catch (NumberFormatException e) {
+////                    Toast.makeText(getActivity(), Consts.OGTT_INVALID, Toast.LENGTH_SHORT).show();
+//                    ogtt = 0;
+//                }
+//
+//            }
+//        });
 
         // 输入按钮监听
         ageBtn.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +241,6 @@ public class AnalyzeFragment extends Fragment {
                             public void onSelected(int selectedIndex, String item) {
                                 selectText = item; // 更新显示的内容
                                 age = Integer.parseInt(item); // 更新age
-                                Log.d("WheelView", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
                             }
                         });
             }
@@ -254,7 +254,6 @@ public class AnalyzeFragment extends Fragment {
                             public void onSelected(int selectedIndex, String item) {
                                 selectText = item;
                                 height = Float.parseFloat(item)/100.0f;
-                                Log.d("WheelView", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
                             }
                         });
             }
@@ -262,25 +261,34 @@ public class AnalyzeFragment extends Fragment {
         weightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weight_Float = 0;
+                weight_Int = 0;
                 showChoiceDialog(R.id.wheel_view1, R.id.wheel_view2,
                         weightList, zeroToNineList, weightBtn,
                         new WheelView.OnWheelViewListener(){
                             @Override
                             public void onSelected(int selectedIndex, String item) {
                                 selectText_left = item;
-                                Log.d("WheelView", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                                weight_Int = Integer.parseInt(item);
+                                weight = weight_Int + weight_Float * 0.1f;
+                                Log.d("WEIGHT",weight+"");
                             }
                         },
                         new WheelView.OnWheelViewListener(){
                             @Override
                             public void onSelected(int selectedIndex, String item) {
                                 selectText_right = item;
-                                Log.d("WheelView", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                                weight_Float = Float.parseFloat(item);
+                                weight = weight_Int + weight_Float * 0.1f;
+                                Log.d("WEIGHT",weight+"");
                             }
                         }
                 );
+//                weight = weight_Int + weight_Float * 0.1f;
+//                Log.d("WEIGHT",weight+"");
             }
         });
+        // 单栏显示版
 //        ogttBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -295,13 +303,43 @@ public class AnalyzeFragment extends Fragment {
 //                        });
 //            }
 //        });
+        // 双栏显示版
+        ogttBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ogtt_Float = 0;
+                ogtt_Int = 0;
+                showChoiceDialog(R.id.wheel_view1, R.id.wheel_view2,
+                        ogttList, zeroToNineList, ogttBtn,
+                        new WheelView.OnWheelViewListener(){
+                            @Override
+                            public void onSelected(int selectedIndex, String item) {
+                                selectText_left = item;
+                                ogtt_Int = Integer.parseInt(item);
+                                ogtt = ogtt_Int + ogtt_Float * 0.1f;
+                                Log.d("OGTT",ogtt+"");
+                            }
+                        },
+                        new WheelView.OnWheelViewListener(){
+                            @Override
+                            public void onSelected(int selectedIndex, String item) {
+                                selectText_right = item;
+                                ogtt_Float = Float.parseFloat(item);
+                                ogtt = ogtt_Int + ogtt_Float * 0.1f;
+                                Log.d("OGTT",ogtt+"");
+                            }
+                        }
+                );
+            }
+        });
     }
 
     // 更新时间显示
     private void updateTime(){
         long time = System.currentTimeMillis();
         Date date = new Date(time);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分 E", Locale.CHINA);
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分 E", Locale.CHINA);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm E", Locale.ENGLISH);
         timeText.setText(format.format(date));
     }
 
@@ -324,14 +362,14 @@ public class AnalyzeFragment extends Fragment {
 
         new AlertDialog.Builder(this.getActivity())
                 .setView(outerView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         infoBtn.setText(selectText);
                         infoBtn.setTextColor(green);
                     }
                 })
-                .setNegativeButton("取消",null)
+                .setNegativeButton("CANCEL",null)
                 .show();
     }
 
@@ -346,8 +384,8 @@ public class AnalyzeFragment extends Fragment {
      * @param infoBtn 激活对话框的按钮（用于显示所选项）
      */
     private void showChoiceDialog(int leftwheelviewId, int rightwheelviewId,
-                                  ArrayList<String> dataList_L,
-                                  ArrayList<String> dataList_R, final Button infoBtn,
+                                  ArrayList<String> dataList_L, ArrayList<String> dataList_R,
+                                  final Button infoBtn,
                                   WheelView.OnWheelViewListener leftListener,
                                   WheelView.OnWheelViewListener rightListener){
         selectText_left = "";
@@ -367,17 +405,15 @@ public class AnalyzeFragment extends Fragment {
 
         new AlertDialog.Builder(this.getActivity())
                 .setView(outerView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String text = selectText_left + "." + selectText_right;
                         infoBtn.setText(text);
                         infoBtn.setTextColor(green);
-//                        if(!selectText_left.equals("") && !selectText_right.equals(""))
-                        weight = Float.parseFloat(selectText_left) + 0.1f * Float.parseFloat(selectText_right);
                     }
                 })
-                .setNegativeButton("取消",null)
+                .setNegativeButton("CANCEL",null)
                 .show();
     }
 

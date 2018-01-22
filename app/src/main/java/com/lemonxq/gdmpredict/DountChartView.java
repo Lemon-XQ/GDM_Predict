@@ -35,7 +35,9 @@ public class DountChartView extends View {
 
     // 颜色及对应标注数组
     private int[] color = {mRingColor,mSectorColor};
-    private String[] text = {"妊娠期糖尿病","正常"};
+    //    private String[] text = {"妊娠期糖尿病","正常"};
+    private String[] text = {getResources().getString(R.string.GDM_en),
+                             getResources().getString(R.string.normal_en)};
 
     /**
      * 终点扇形角度
@@ -174,16 +176,19 @@ public class DountChartView extends View {
         drawLabels(canvas);
     }
 
-    private float margin = ScreenUtil.dp2px(40,this.getContext());
+    private float margin = ScreenUtil.dp2px(30,this.getContext());
     private float labeltextMargin = ScreenUtil.dp2px(10,this.getContext());
     private float textMargin = ScreenUtil.dp2px(150,this.getContext());
     private float labelRadius = ScreenUtil.dp2px(10,this.getContext());
+    private float textMargin2 = ScreenUtil.dp2px(25,this.getContext());
 
     private void drawLabels(Canvas canvas){
         for (int i = 0; i < 2; i++){
             // 画标注
-            float labelX = (float) (centerX - mOuterRadius + textMargin*i);
-            float labelY = (float) (centerY + mOuterRadius + margin);
+//            float labelX = (float) (centerX - mOuterRadius + textMargin*i);
+//            float labelY = (float) (centerY + mOuterRadius + margin);
+            float labelX = (float) (centerX - 1.5*mOuterRadius );
+            float labelY = (float) (centerY + mOuterRadius + margin +textMargin2*i);
             mLabelPaint.setColor(color[i]);// 设置画笔颜色
             canvas.drawCircle(labelX, labelY, labelRadius, mLabelPaint);
             // 画文字
