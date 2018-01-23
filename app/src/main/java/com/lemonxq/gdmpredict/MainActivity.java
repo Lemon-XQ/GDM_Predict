@@ -56,9 +56,7 @@ public class MainActivity extends AppCompatActivity {
                             LoadProgressBar(3000);
                         }
                         else {
-//            showResponse("年龄、身高、体重、空腹血糖不能为空");
-                            showResponse("Age、Height、Weight、Fasting blood glucose level" +
-                                    " CANNOT BE NULL");
+                            showResponse(getResources().getString(R.string.InvalidInput_cn));
                         }
                         break;
 
@@ -97,51 +95,45 @@ public class MainActivity extends AppCompatActivity {
 
     private void AnalyseDIAB(int age, float height, float weight, float ogtt) {
 
-//        if (checkDataValid(age, height, weight, ogtt)) {
-            // 创建请求体对象
-            CommonRequest request = new CommonRequest();
+        // 创建请求体对象
+        CommonRequest request = new CommonRequest();
 
-            // 填充参数
-            request.addRequestParam("age",age + "");
-            request.addRequestParam("height",height + "");
-            request.addRequestParam("weight",weight + "");
-            request.addRequestParam("OGTT",ogtt + "");
+        // 填充参数
+        request.addRequestParam("age",age + "");
+        request.addRequestParam("height",height + "");
+        request.addRequestParam("weight",weight + "");
+        request.addRequestParam("OGTT",ogtt + "");
 
-            // 发送请求
-            HttpUtil.sendPost(Consts.URL_Analyse, request.getJsonStr(), new okhttp3.Callback() {
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    CommonResponse res = new CommonResponse(response.body().string());
-                    String resCode = res.getResCode();
-                    String resMsg = res.getResMsg();
-                    HashMap<String,String> property = res.getPropertyMap();
+        // 发送请求
+        HttpUtil.sendPost(Consts.URL_Analyse, request.getJsonStr(), new okhttp3.Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                CommonResponse res = new CommonResponse(response.body().string());
+                String resCode = res.getResCode();
+                String resMsg = res.getResMsg();
+                HashMap<String,String> property = res.getPropertyMap();
 
-                    if(resCode.equals(Consts.SUCCESSCODE_GDMANALYSE)){
-                        // 分析完成，启动分析结果界面
-                        float GDM_Prob = Float.parseFloat(property.get("GDMProb"));
-                        Log.d("GDM_Prob",GDM_Prob+"");
-                        replaceFragment(new GDMResultFragment(),R.id.analyzeContainer,
-                                "GDMProb",GDM_Prob);
-                    }else{
-                        showResponse(resMsg);
-                    }
+                if(resCode.equals(Consts.SUCCESSCODE_GDMANALYSE)){
+                    // 分析完成，启动分析结果界面
+                    float GDM_Prob = Float.parseFloat(property.get("GDMProb"));
+                    Log.d("GDM_Prob",GDM_Prob+"");
+                    replaceFragment(new GDMResultFragment(),R.id.analyzeContainer,
+                            "GDMProb",GDM_Prob);
+                }else{
+                    showResponse(resMsg);
                 }
+            }
 
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    e.printStackTrace();
-                }
-            });
-//        } else {
-////            showResponse("年龄、身高、体重、空腹血糖不能为空");
-//            showResponse("Age、Height、Weight、Fasting blood glucose level" +
-//                    " CANNOT BE NULL");
-//        }
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private boolean checkDataValid(int age, float height, float weight, float ogtt) {
         if(age == 0 || height == 0 || weight == 0 || ogtt == 0)
-            return  false;
+            return false;
         return true;
     }
 
@@ -171,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     void LoadProgressBar(final long time){
         final ProgressDialog progressDialog = new ProgressDialog
                 (MainActivity.this);
-        progressDialog.setMessage("AI IS THINKING...");
+        progressDialog.setMessage(getResources().getString(R.string.thinking_cn));
         progressDialog.setCancelable(false);
         progressDialog.show();
         new Thread(new Runnable() {

@@ -67,7 +67,7 @@ public class AnalyzeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_analyze_en, container, false);
+        view = inflater.inflate(R.layout.fragment_analyze_cn, container, false);
         InitComponent();
         SetListeners();
         updateTime();
@@ -338,8 +338,8 @@ public class AnalyzeFragment extends Fragment {
     private void updateTime(){
         long time = System.currentTimeMillis();
         Date date = new Date(time);
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分 E", Locale.CHINA);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm E", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分 E", Locale.CHINA);
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm E", Locale.ENGLISH);
         timeText.setText(format.format(date));
     }
 
@@ -362,14 +362,15 @@ public class AnalyzeFragment extends Fragment {
 
         new AlertDialog.Builder(this.getActivity())
                 .setView(outerView)
-                .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.confirm_cn),
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         infoBtn.setText(selectText);
                         infoBtn.setTextColor(green);
                     }
                 })
-                .setNegativeButton("CANCEL",null)
+                .setNegativeButton(getResources().getString(R.string.cancel_cn),null)
                 .show();
     }
 
@@ -405,7 +406,8 @@ public class AnalyzeFragment extends Fragment {
 
         new AlertDialog.Builder(this.getActivity())
                 .setView(outerView)
-                .setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.confirm_cn),
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String text = selectText_left + "." + selectText_right;
@@ -413,7 +415,7 @@ public class AnalyzeFragment extends Fragment {
                         infoBtn.setTextColor(green);
                     }
                 })
-                .setNegativeButton("CANCEL",null)
+                .setNegativeButton(getResources().getString(R.string.cancel_cn),null)
                 .show();
     }
 

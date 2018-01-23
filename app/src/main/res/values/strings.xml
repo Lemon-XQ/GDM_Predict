@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">Care-2-you</string>
-    <string name="app_name_cn">安心孕</string>
+    <string name="app_name_en">Care-2-you</string>
+    <string name="app_name">安心孕</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>
     <string name="_btn_send">发送</string>
@@ -27,20 +26,24 @@
     <string name="Signup">注册</string>
     <string name="Guest">游客</string>
     <string name="Account">账号</string>
-    <string name="Age">年龄(岁)</string>
-    <string name="Height">身高(cm)</string>
-    <string name="Weight">体重(kg)</string>
-    <string name="OGTT">空腹血糖(mmol/L)</string>
-    <string name="input_hint">点击输入</string>
-    <string name="RecordHint">记录您现在的指数</string>
-    <string name="ConfirmAnalyse">开始分析</string>
-    <string name="ShowAnalyseResult">检测结果</string>
-    <string name="normal_msg">您患病的几率较小，建议按实际情况及时检查血糖水平变化，如有情况改变去医院做进一步检查</string>
-    <string name="normal">正常</string>
-    <string name="GDM_msg">您患病的几率较大，建议去医院做进一步检查以确定</string>
-    <string name="GDM">妊娠期糖尿病</string>
-    <string name="accuracy">准确度</string>
 
+    <string name="Age_cn">年龄(岁)</string>
+    <string name="Height_cn">身高(cm)</string>
+    <string name="Weight_cn">体重(kg)</string>
+    <string name="OGTT_cn">空腹血糖(mmol/L)</string>
+    <string name="input_hint_cn">点击输入</string>
+    <string name="RecordHint_cn">记录您现在的指数</string>
+    <string name="ConfirmAnalyse_cn">开始分析</string>
+    <string name="ShowAnalyseResult_cn">检测结果</string>
+    <string name="normal_msg_cn">您患病的几率较小，建议按实际情况及时检查血糖水平变化，如有情况改变去医院做进一步检查</string>
+    <string name="normal_cn">正常</string>
+    <string name="GDM_msg_cn">您患病的几率较大，建议去医院做进一步检查以确定</string>
+    <string name="GDM_cn">妊娠期糖尿病</string>
+    <string name="accuracy_cn">准确度</string>
+    <string name="InvalidInput_cn">年龄、身高、体重、空腹血糖不能为空</string>
+    <string name="thinking_cn">人工智能正在思考中...</string>
+    <string name="confirm_cn">确定</string>
+    <string name="cancel_cn">取消</string>
 
     <string name="Age_en">Ages(years old)</string>
     <string name="Height_en">Height(cm)</string>
@@ -57,6 +60,10 @@
 It is suggested that to have a further examination in hospital to confirm.</string>
     <string name="GDM_en">Gestational Diabetes Mellitus</string>
     <string name="accuracy_en">Accuracy</string>
+    <string name="InvalidInput_en">Age、Height、Weight、Fasting blood glucose level CANNOT BE NULL</string>
+    <string name="thinking_en">AI IS THINKING...</string>
+    <string name="confirm_en">CONFIRM</string>
+    <string name="cancel_en">CANCEL</string>
 
     <string-array name="welcome_trips">
         <item>主人，奴婢在此等候多时了</item>

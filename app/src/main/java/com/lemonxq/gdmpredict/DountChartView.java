@@ -36,8 +36,8 @@ public class DountChartView extends View {
     // 颜色及对应标注数组
     private int[] color = {mRingColor,mSectorColor};
     //    private String[] text = {"妊娠期糖尿病","正常"};
-    private String[] text = {getResources().getString(R.string.GDM_en),
-                             getResources().getString(R.string.normal_en)};
+    private String[] text = {getResources().getString(R.string.GDM_cn),
+                             getResources().getString(R.string.normal_cn)};
 
     /**
      * 终点扇形角度

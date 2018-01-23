@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/RecordHint"
+        android:text="@string/RecordHint_cn"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:padding="10dp"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/Age"
+            android:text="@string/Age_cn"
             android:textColor="@color/green"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -52,7 +52,7 @@
             android:id="@+id/ageBtn"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:text="@string/input_hint"
+            android:text="@string/input_hint_cn"
             android:textSize="18sp"
             android:textColor="@color/grey"
             android:gravity="center_vertical|end"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/Height"
+            android:text="@string/Height_cn"
             android:textColor="@color/green"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -99,7 +99,7 @@
             android:id="@+id/heightBtn"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:text="@string/input_hint"
+            android:text="@string/input_hint_cn"
             android:textSize="18sp"
             android:textColor="@color/grey"
             android:gravity="center_vertical|end"
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/Weight"
+            android:text="@string/Weight_cn"
             android:textColor="@color/green"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -146,7 +146,7 @@
             android:id="@+id/weightBtn"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:text="@string/input_hint"
+            android:text="@string/input_hint_cn"
             android:textSize="18sp"
             android:textColor="@color/grey"
             android:gravity="center_vertical|end"
@@ -182,7 +182,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/OGTT"
+            android:text="@string/OGTT_cn"
             android:textColor="@color/green"
             android:textSize="20sp"
             android:maxLines="1"
@@ -190,26 +190,26 @@
             app:layout_constraintRight_toLeftOf="@+id/ogtt"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--<Button-->
-            <!--android:id="@+id/ogttBtn"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:text="@string/input_hint"-->
-            <!--android:textSize="18sp"-->
-            <!--android:textColor="@color/grey"-->
-            <!--android:gravity="center_vertical|end"-->
-            <!--android:background="@color/transparent"/>-->
-        <EditText
-            android:id="@+id/ogtt"
+        <Button
+            android:id="@+id/ogttBtn"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|end"
-            android:textColor="@color/green"
+            android:text="@string/input_hint_cn"
             android:textSize="18sp"
-            android:hint="@string/input_hint"
-            app:layout_constraintBaseline_toBaselineOf="@+id/ogttText"
-            app:layout_constraintLeft_toRightOf="@+id/ogttText"
-            app:layout_constraintRight_toRightOf="parent" />
+            android:textColor="@color/grey"
+            android:gravity="center_vertical|end"
+            android:background="@color/transparent"/>
+        <!--<EditText-->
+            <!--android:id="@+id/ogtt"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center_vertical|end"-->
+            <!--android:textColor="@color/green"-->
+            <!--android:textSize="18sp"-->
+            <!--android:hint="@string/input_hint_cn"-->
+            <!--app:layout_constraintBaseline_toBaselineOf="@+id/ogttText"-->
+            <!--app:layout_constraintLeft_toRightOf="@+id/ogttText"-->
+            <!--app:layout_constraintRight_toRightOf="parent" />-->
     </LinearLayout>
 
     <!--分割线-->
@@ -226,7 +226,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:background="@drawable/button_shape"
-        android:text="@string/ConfirmAnalyse"
+        android:text="@string/ConfirmAnalyse_cn"
         android:textColor="@color/green"
         android:textSize="18sp" />
 

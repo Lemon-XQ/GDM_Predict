@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ShowAnalyseResult"
+        android:text="@string/ShowAnalyseResult_cn"
         android:textSize="20sp"
         android:padding="12dp"
         android:textColor="@color/black"/>
@@ -19,7 +19,7 @@
         android:id="@+id/AnalyseRes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/normal_msg"
+        android:text="@string/normal_msg_cn"
         android:textSize="20sp"
         android:padding="12dp"
         android:textColor="@color/green"/>
@@ -34,7 +34,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/greenoutlinerect"
-        android:text="@string/normal"
+        android:text="@string/normal_cn"
         android:textSize="25sp"
         android:textColor="@color/green"
         android:padding="15dp"
@@ -51,7 +51,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/accuracy"
+        android:text="@string/accuracy_cn"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:padding="10dp"/>
